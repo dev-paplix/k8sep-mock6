@@ -2,7 +2,6 @@ QUESTION 1:
 
 Create a new pod called web-pod with image busy box Allow the pod to be able to set system_time The container should sleep for 3200 seconds
 
-
 QUESTION 2:
 Create a new deployment called myproject, with image nginx:1.16 and 1 replica. Next upgrade the deployment to version 1.17 using rolling update Make sure that the version upgrade is recorded in the resource annotation.
 
@@ -26,7 +25,6 @@ becomes unbound from a Persistent Volume Claim
 QUESTION 6:
 Upgrade your Kubeadm to 1.31.1-x version
 
-
 QUESTION 7:
 Make neccessary preparation and Schedule a pod as follows:
 ✑ Name: nginx-jaud00401
@@ -44,7 +42,6 @@ The ingress should block traffic from an IP range of your choice except some oth
 Should also have namespace and pod selector. Ports for ingress policy should be 6379
 For Egress, it should allow traffic to an IP range of your choice on 5978 port.
 
-
 QUESTION 10:
 
 You are managing a Kubernetes cluster for a web application consisting of frontend, backend, and database components.
@@ -61,9 +58,6 @@ Backend Deployment: First, let's create the backend deployment which the fronten
 
 QUESTION 11:
 Create a cronjob that runs a simple command to print the current date
-
-
-
 
 QUESTION 12:
 Create a statefulset names postgres with the following charecteristics"
@@ -94,7 +88,6 @@ MYSQL_DATABASE and MYSQL_USER from the configmap
 
 QUESTION 16:
 
-
 Create a deployment named “apache” in the web namespace that uses the image httpd:2.4.54 and contains three pod replicas Scale the deployment named 'apache' from 3 replicas to 5. Change the image used for the pods in the 'apache' deployment to httpd:alpine .
 
 QUESTION 17:
@@ -105,4 +98,3 @@ namespace: database
 image: redis:bookworm
 local volume: /var/db
 volumeMount: /usr/local/etc/redis
-

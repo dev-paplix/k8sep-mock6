@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: newrole-role
+  namespace: newrole
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["create", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: newrole-binding
+  namespace: newrole
+subjects:
+  - kind: User
+    name: current
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: newrole-role
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: appychip
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: myapp # Adjust to match specific pod labels if needed
+  policyTypes:
+    - Ingress
+    - Egress
+
+  # Ingress rules
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: 192.168.1.0/24 # Replace with the allowed IP range
+        - ipBlock:
+            cidr: 10.0.0.0/24
+            except:
+              - 10.0.0.1/32 # Replace with the IP range to be blocked within this block
+        - namespaceSelector:
+            matchLabels:
+              team: frontend # Adjust label as per namespace selector
+        - podSelector:
+            matchLabels:
+              role: db # Adjust to specific pod labels if needed
+      ports:
+        - protocol: TCP
+          port: 6379
+
+  # Egress rules
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 172.16.0.0/16 # Replace with the desired IP range
+      ports:
+        - protocol: TCP
+          port: 5978
+# Is this real, chat?
