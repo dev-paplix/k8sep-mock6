@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: appychip
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: your-app-label  # Replace with the appropriate label for your pods
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: 192.168.1.0/24  # IP range to block
+            except:
+              - 192.168.1.128/25  # IP range to allow
+      ports:
+        - protocol: TCP
+          port: 6379
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 10.0.0.0/16  # IP range to allow
+      ports:
+        - protocol: TCP
+          port: 5978
