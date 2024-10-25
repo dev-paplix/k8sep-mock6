@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-multi
+  labels:
+    app.kubernetes.io/name: MyApp
+spec:
+  containers:
+  - name: container1
+    image: nginx
+    command:
+  - name: container2
+    image: busybox
+    command: ['sh', '-c', 'sleep 4800']
+

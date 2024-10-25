@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: database
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: redis
+        image: redis:bookworm
+        volumeMounts:
+        # a mount for site-data
+          - name: config
+            mountPath: /usr/local/etc/redis
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: task-pv-claim
+
