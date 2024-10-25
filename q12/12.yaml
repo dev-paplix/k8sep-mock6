@@ -1,0 +1,49 @@
+controlplane $ cat postgress.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-svc
+  labels:
+    app: postgres-svc
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+      name: postgres
+  selector:
+    app: postgres
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres # has to match .spec.template.metadata.labels
+  serviceName: postgres-svc
+  replicas: 1 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: postgres
+        image: postgres:13.16-bookworm
+        env:
+        - name: POSTGRES_PASSWORD
+          value: "test"
+        - name: POSTGRES_USER
+          value: "test"
+        - name: POSTGRES_DATABASE
+          value: "test"
+
+        ports:
+        - containerPort: 5432
+          name: postgres
+
+controlplane $

@@ -1,0 +1,16 @@
+controlplane $ cat q5.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: user-data-pv
+spec:
+  capacity:
+    storage: 3Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-path
+  hostPath:
+    path: "/mnt/ssd"
+controlplane $

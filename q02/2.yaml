@@ -1,0 +1,23 @@
+controlplane $ cat q2.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myproject
+  labels:
+    app: myproject
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myproject
+  template:
+    metadata:
+      labels:
+        app: myproject
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        ports:
+        - containerPort: 80
+controlplane $

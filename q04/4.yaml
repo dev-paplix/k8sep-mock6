@@ -1,0 +1,16 @@
+controlplane $ cat q4.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-multi
+spec:
+  containers:
+  - name: contianer1
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+  - name: container2
+    image: busybox:1.28
+    command: ['sleep','4800']
+  restartPolicy: OnFailure
+controlplane $

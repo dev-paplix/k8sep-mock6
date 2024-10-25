@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+data:
+  MYSQL_ROOT_PASSWORD: dGVzdA==
+  MYSQL_PASSWORD: dGVzdA==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+data:
+  # property-like keys; each key maps to a simple value
+  MYSQL_DATABASE: test
+  MYSQL_USER: "test"
+controlplane $
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  labels:
+    app: mysql-service
+spec:
+  ports:
+  - port: 3306
+    name: mysql-service
+  clusterIP: None
+  selector:
+    app: mysql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql # has to match .spec.template.metadata.labels
+  serviceName: mysql-service
+  replicas: 1 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: mysql # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mysql
+        image: mysql:8.0.40-debian
+        ports:
+        - containerPort: 3306
+          name: mysql
+        env:
+        # Define the environment variable
+        - name: MYSQL_USER # Notice that the case is different here
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap       # The ConfigMap this value comes from.
+              key: MYSQL_USER
+        - name: MYSQL_DATABASE  # Notice that the case is different here
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap           # The ConfigMap this value comes from.
+              key: MYSQL_DATABASE # The key to fetch. # The key to fetch.
+        - name: MYSQL_PASSWORD  # Notice that the case is different here
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret           # The ConfigMap this value comes from.
+              key: MYSQL_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD  # Notice that the case is different here
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret           # The ConfigMap this value comes from.
+              key: MYSQL_ROOT_PASSWORD
+controlplane $
