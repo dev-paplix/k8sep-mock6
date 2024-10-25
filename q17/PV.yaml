@@ -1,12 +1,11 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: user-data-pv
+  name: redis-pv
 spec:
   capacity:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
   hostPath:
-    path: /mnt/ssd
+    path: /var/db  # Local path on the host
