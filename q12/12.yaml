@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres # has to match .spec.template.metadata.labels
+  replicas: 1 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: postgres # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: postgres
+        image: postgres:13.16-bookworm        
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD 
+          value: "test"
+        - name: POSTGRES_USER    
+          value: "test"
+        - name: POSTGRES_DB  
+          value: "test"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-svc
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: LoadBalancer
