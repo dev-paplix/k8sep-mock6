@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-pod
+spec:
+  containers:
+  - name: busyboxs
+    image: busybox:1.28
+    args:
+    - sleep
+    - "3200"
