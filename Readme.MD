@@ -1,3 +1,5 @@
+Name: Muhammad Aiman bin Masod
+
 QUESTION 1:
 
 Create a new pod called web-pod with image busy box Allow the pod to be able to set system_time The container should sleep for 3200 seconds
@@ -95,7 +97,7 @@ MYSQL_DATABASE and MYSQL_USER from the configmap
 QUESTION 16:
 
 
-Create a deployment named “apache” in the web namespace that uses the image httpd:2.4.54 and contains three pod replicas Scale the deployment named 'apache' from 3 replicas to 5. Change the image used for the pods in the 'apache' deployment to httpd:alpine .
+Create a deployment named “apache” in the web namespace that uses the image httpd:2.4.54 and contains three pod replicas Scale the deployment named 'apache' from 3 replicas to 5. Change the image used for the pods in the 'apache' deployment to httpd:alpine.
 
 QUESTION 17:
 

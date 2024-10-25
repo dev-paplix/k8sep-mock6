@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx-jaud00401
+  name: nginx-jaud00401
+spec:
+  containers:
+  - image: nginx
+    name: nginx-jaud00401
+    resources: {}
+  nodeSelector:
+    disk: ssd
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
