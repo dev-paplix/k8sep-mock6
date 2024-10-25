@@ -1,0 +1,34 @@
+#deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:bookworm
+        ports:
+        - containerPort: 80
+---
+#service
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpd-service
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: httpd
