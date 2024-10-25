@@ -1,0 +1,25 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: syakir
+  name: role-access
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["create", "list"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: role-binding
+  namespace: syakir
+subjects:
+- kind: User
+  name: syakirzahiri
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: role-access
+  apiGroup: rbac.authorization.k8s.io
