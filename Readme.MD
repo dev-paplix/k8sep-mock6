@@ -1,21 +1,21 @@
-QUESTION 1:
+QUESTION 1: <done>
 
 Create a new pod called web-pod with image busy box Allow the pod to be able to set system_time The container should sleep for 3200 seconds
 
 
-QUESTION 2:
+QUESTION 2: <done>
 Create a new deployment called myproject, with image nginx:1.16 and 1 replica. Next upgrade the deployment to version 1.17 using rolling update Make sure that the version upgrade is recorded in the resource annotation.
 
-QUESTION 3:
+QUESTION 3: <done>
 Create a new deployment called my-deployment. Scale the deployment to 3 replicas. Make sure desired number of pod always running.
 
-QUESTION 4:
+QUESTION 4: <done>
 Create a pod called pod-multi with two containers, as given below:
 Container 1 - name: container1, image: nginx
 Container2 - name: container2, image: busybox,
 command: sleep 4800
 
-QUESTION 5:
+QUESTION 5: <done>
 Create a YAML file defining a Persistent Volume (PV) named user-data-pv with the following characteristics:
 Uses the hostPath storage type with the path /mnt/ssd
 Provides ReadWriteOnce access mode

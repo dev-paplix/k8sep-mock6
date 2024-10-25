@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-multi
+spec:
+  containers:
+  - name: container1
+    image: nginx
+  - name: container2
+    image: busybox
+    ports:
+    - containerPort: 80
+    command: ['sh', '-c', 'echo "Hello, Kubernetes!" && sleep 4800']
+    securityContext:
+        capabilities:
+          add:
+            - SYS_TIME
