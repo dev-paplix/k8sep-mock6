@@ -23,7 +23,7 @@ Reclaims the storage automatically when the PV
 becomes unbound from a Persistent Volume Claim
 (PVC)
 
-QUESTION 6:
+QUESTION 6: 
 Upgrade your Kubeadm to 1.31.1-x version
 
 
@@ -33,7 +33,7 @@ Make neccessary preparation and Schedule a pod as follows:
 ✑ Image: nginx
 ✑ Node selector: disk=ssd
 
-QUESTION 8:
+QUESTION 8: Pending
 Create a role access to the namespace of the newrole. Use the current role to create and list the pods
 
 QUESTION 9:
@@ -45,7 +45,7 @@ Should also have namespace and pod selector. Ports for ingress policy should be 
 For Egress, it should allow traffic to an IP range of your choice on 5978 port.
 
 
-QUESTION 10:
+QUESTION 10: Next
 
 You are managing a Kubernetes cluster for a web application consisting of frontend, backend, and database components.
 The frontend pods should be co-located with the backend pods for performance reasons, while the database pods should be spread out
@@ -80,7 +80,7 @@ httpd:bookworm
 
 Expose it to the web on example.org domain
 
-QUESTION 14:
+QUESTION 14: Next
 
 Make a backup from your cluster, and then delete the deployment you created in the last question. Restore the backup and make sure the previous deployment is there
 
