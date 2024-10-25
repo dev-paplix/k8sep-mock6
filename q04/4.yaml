@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: container1
+    image: nginx:latest
+  - name: container2
+    image: busybox:latest
+    command: ['sh', '-c', 'echo The app is running! && sleep 4800']
+    ports:
+    - containerPort: 80

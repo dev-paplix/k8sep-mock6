@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  MYSQL_DATABASE: db
+  MYSQL_USER: myuser
+  MYSQL_HOST: mysql-service
+  PMA_HOST: mysql-service
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+type: Opaque
+data:
+  MYSQL_PASSWORD: cGFzc3dvcmQ=  # base64 encoded password 'password'
+  MYSQL_ROOT_PASSWORD: cm9vdHBhc3M=  # base64 encoded root password 'rootpass'
+  PMA_PASSWORD: cGFzc3dvcmQ=
