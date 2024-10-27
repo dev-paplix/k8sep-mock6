@@ -23,20 +23,20 @@ Reclaims the storage automatically when the PV
 becomes unbound from a Persistent Volume Claim
 (PVC)
 
-QUESTION 6:
+QUESTION 6:<kiv>
 Upgrade your Kubeadm to 1.31.1-x version
 
 
-QUESTION 7:
+QUESTION 7:<done>
 Make neccessary preparation and Schedule a pod as follows:
 ✑ Name: nginx-jaud00401
 ✑ Image: nginx
 ✑ Node selector: disk=ssd
 
-QUESTION 8:
+QUESTION 8: <done>
 Create a role access to the namespace of the newrole. Use the current role to create and list the pods
 
-QUESTION 9:
+QUESTION 9: <done>
 
 Create a Network Policy named "appychip" in default namespace
 There should be two types, ingress and egress.
@@ -45,7 +45,7 @@ Should also have namespace and pod selector. Ports for ingress policy should be 
 For Egress, it should allow traffic to an IP range of your choice on 5978 port.
 
 
-QUESTION 10:
+QUESTION 10:<done>
 
 You are managing a Kubernetes cluster for a web application consisting of frontend, backend, and database components.
 The frontend pods should be co-located with the backend pods for performance reasons, while the database pods should be spread out
