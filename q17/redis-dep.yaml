@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: redis
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: redis:bookworm
+        name: redis
+        volumeMounts:
+        - mountPath: "/usr/local/etc/redis"
+          name: redis-data
+      volumes:
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: redis-pvc
+        resources: {}
+status: {}

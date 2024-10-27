@@ -3,18 +3,19 @@ kind: Pod
 metadata:
   creationTimestamp: null
   labels:
-    run: pod-multi
-  name: pod-multi
+    run: web-pod
+  name: web-pod
 spec:
   containers:
-  - image: nginx
-    name: container1
-  - image: busybox
-    name: container2
-    command:
+  - command:
     - sleep
-    - "4800"
+    - "3200"
+    image: busybox
+    name: web-pod
     resources: {}
+    securityContext:
+      capabilities:
+        add: ["SYS_TIME"]
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}

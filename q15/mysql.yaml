@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  labels:
+    app: mysql-service
+spec:
+  ports:
+  - port: 3306
+    targetPort: 3306
+  type: NodePort
+  selector:
+    app: mysql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 1
+  minReadySeconds: 10 
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mysql
+        image: mysql:8.0.40-debian
+        ports:
+        - containerPort: 3306
+          name: db
+        volumeMounts:
+        - name: db-data
+          mountPath: /mnt/data
+        envFrom:
+        - configMapRef:
+            name: mysql-config
+        - secretRef:
+            name: mysql-secret
+  volumeClaimTemplates:
+  - metadata:
+      name: db-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

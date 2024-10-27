@@ -1,5 +1,8 @@
-QUESTION 1:
+NAME : MUHAMMAD IKHMAL HAZIQ BIN AMAR
 
+---
+
+QUESTION 1:
 Create a new pod called web-pod with image busy box Allow the pod to be able to set system_time The container should sleep for 3200 seconds
 
 
