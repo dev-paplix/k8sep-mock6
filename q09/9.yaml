@@ -33,3 +33,4 @@ spec:
     - protocol: TCP
       port: 5978
 
+# cat .kube/config  -> to get ip
