@@ -1,0 +1,38 @@
+# openssl genrsa -out hasbullah.key 2048
+
+# openssl req -new -key hasbullah.key -out hasbullah.csr -subj "/CN=hasbullah/O=dev/O=example.org"
+
+# openssl x509 -req -CA  /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -days 730 -in hasbullah.csr -out hasbullah.crt
+# kubectl config set-credentials hasbullah --client-certificate=hasbullah.crt --client-key=hasbullah.key
+# kubectl config set-context hasbullah-kubernetes --cluster=kubernetes --user=hasbullah --namespace=newrole
+# kubectl config get-contexts
+# kubectl config use-context
+# kubectl api-resources -o wide | grep pod
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: newrole
+  name: pod-manager
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pod-access
+  namespace: newrole
+subjects:
+# You can specify more than one "subject"
+- kind: User
+  name: hasbullah # "name" is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  # "roleRef" specifies the binding to a Role / ClusterRole
+  kind: Role #this must be Role or ClusterRole
+  name: pod-manager # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io

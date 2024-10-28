@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    app: webapp
+    component: database
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+      component: database
+  template:
+    metadata:
+      labels:
+        app: webapp
+        component: database
+    spec:
+      containers:
+      - name: database-container
+        image: database-image
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app: webapp
+                component: database
+            topologyKey: "kubernetes.io/hostname"

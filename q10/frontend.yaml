@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: webapp
+    component: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+      component: frontend
+  template:
+    metadata:
+      labels:
+        app: webapp
+        component: frontend
+    spec:
+      containers:
+      - name: frontend-container
+        image: frontend-image
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app: webapp
+                component: backend
+            topologyKey: "kubernetes.io/hostname"
